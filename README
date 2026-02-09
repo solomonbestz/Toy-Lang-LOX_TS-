@@ -1,0 +1,198 @@
+# 🧠 Toy Language Interpreter (TypeScript + Deno)
+
+A learning-focused implementation of a programming language interpreter inspired by classic interpreter construction guides.
+This version follows the concepts from a Java-based interpreter book but is re-implemented using **TypeScript** and the **Deno runtime**.
+
+The goal is to understand how languages work internally — from source code → tokens → AST → execution.
+
+---
+
+## 🚀 Purpose
+
+This project exists to:
+
+* Learn how programming languages actually work
+* Translate interpreter concepts from Java into TypeScript
+* Explore runtime design using Deno
+* Build a foundation for future language/VM work
+
+It is **not** meant to be production-ready.
+It is an educational interpreter.
+
+---
+
+## 🏗️ Architecture Overview
+
+```
+Source Code
+   ↓
+Scanner (Lexer)
+   ↓
+Tokens
+   ↓
+Parser
+   ↓
+AST (Abstract Syntax Tree)
+   ↓
+Interpreter
+   ↓
+Runtime Execution
+```
+
+### Core Modules
+
+| Module           | Responsibility                   |
+| ---------------- | -------------------------------- |
+| `scanner.ts`     | Converts source code into tokens |
+| `parser.ts`      | Builds AST from tokens           |
+| `ast/`           | AST node definitions             |
+| `interpreter.ts` | Walks AST and executes code      |
+| `environment.ts` | Variable scope & storage         |
+| `main.ts`        | CLI entry point                  |
+
+---
+
+## 🛠️ Tech Stack
+
+* **Language:** TypeScript
+* **Runtime:** Deno
+* **Paradigm:** Tree-walking interpreter
+* **Influence:** Java interpreter implementations
+
+Why Deno?
+
+* Built-in TypeScript support
+* No build step
+* Secure runtime
+* Clean module system
+
+---
+
+## 📦 Running the Interpreter
+
+### 1. Install Deno
+
+```bash
+curl -fsSL https://deno.land/install.sh | sh
+```
+
+or
+
+```bash
+brew install deno
+```
+
+---
+
+### 2. Run a file
+
+```bash
+deno run --allow-read main.ts examples/test.lang
+```
+
+---
+
+### 3. Run REPL (if implemented)
+
+```bash
+deno run main.ts
+```
+
+---
+
+## 🧪 Example Code
+
+```
+let x = 10;
+let y = 20;
+
+print x + y;
+```
+
+Output:
+
+```
+30
+```
+
+---
+
+## 📚 Concepts Covered
+
+* Lexing / tokenization
+* Parsing
+* AST construction
+* Tree-walking interpretation
+* Environments & scope
+* Expressions & statements
+* Error handling
+
+---
+
+## 🎯 Learning Goals
+
+This project helps you understand:
+
+* How JavaScript engines work internally
+* How compilers & interpreters differ
+* How languages manage memory & scope
+* How to design your own language
+
+It’s the foundation for building:
+
+* Compilers
+* VMs
+* Game scripting languages
+* Custom DSLs
+* AI scripting engines
+
+---
+
+## 🧭 Roadmap
+
+* [ ] Basic expressions
+* [ ] Variables
+* [ ] Control flow (if/while)
+* [ ] Functions
+* [ ] Closures
+* [ ] Classes
+* [ ] Bytecode VM (future)
+* [ ] Optimizations
+
+---
+
+## 🧠 Inspiration
+
+This implementation follows interpreter-building principles from traditional Java examples, but reimagined using TypeScript and Deno to better understand language design in modern tooling.
+
+---
+
+## 👨‍💻 Author
+
+Built as part of a deeper journey into:
+
+* Language design
+* Systems programming
+* Runtime architecture
+* Compiler construction
+
+---
+
+## ⚠️ Disclaimer
+
+This is an educational interpreter.
+Expect bugs, incomplete features, and experimentation.
+
+That’s the point 🙂
+
+---
+
+## ⭐ Future Vision
+
+This interpreter is a stepping stone toward building:
+
+* A custom scripting language
+* A bytecode VM
+* Possibly a game engine language
+
+---
