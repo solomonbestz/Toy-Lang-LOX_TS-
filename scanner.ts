@@ -45,4 +45,6 @@ class Lox {
     }
 }
 
-var lox = new Lox();
+let lox = new Lox();
+
+console.log(lox)
