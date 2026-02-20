@@ -4,10 +4,12 @@ class Scanner {
 
     constructor(source: string | null){
         this.source = source
+
+        this.scanTokens();
     }
 
     scanTokens(){
-        return []
+        return [this.source]
     }
 }
 
@@ -47,4 +49,4 @@ class Lox {
 
 let lox = new Lox();
 
-console.log(lox)
+console.log(lox.run("Hello"))
