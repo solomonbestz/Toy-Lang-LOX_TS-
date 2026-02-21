@@ -1,16 +1,34 @@
 import { TokenType } from "./tokenType.ts";
+import { Token } from "./token.ts";
 
 class Scanner {
-    source: string | null
+    source?: string | null 
+    tokens: Token[] = [];
+    start = 0;
+    current = 0;
+    line = 1;
 
     constructor(source: string | null){
         this.source = source
 
-        this.scanTokens();
+        
     }
 
-    scanTokens(){
-        return [this.source]
+    scanTokens<Token>(){
+        while(!this.isAtEnd()){
+            this.start = this.current;
+            this.scanToken()
+        }
+        this.tokens.add(new Token(EOF, "", null, line))
+        return this.tokens
+    }
+
+    scanToken(){
+
+    }
+
+    isAtEnd(){
+        return this.current >= this.source?.length
     }
 }
 
