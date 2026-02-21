@@ -1,15 +1,15 @@
 import { TokenType } from "./tokenType.ts";
-import { Token } from "./token.ts";
+import { Literal, Token } from "./token.ts";
 
 
 class Scanner {
-    source?: string | null
+    source: string
     tokens: Token[] = [];
     start = 0;
     current = 0;
     line = 1;
 
-    constructor(source?: string | null){
+    constructor(source: string){
         this.source = source
 
         
@@ -25,7 +25,7 @@ class Scanner {
     }
 
     scanToken(){
-        let char = this.advance()
+        const char = this.advance()
 
         switch (char){
             case '(': this.addToken(TokenType.LEFT_PAREN); break;
@@ -33,18 +33,30 @@ class Scanner {
             case '{': this.addToken(TokenType.LEFT_BRACE); break;
             case '}': this.addToken(TokenType.RIGHT_BRACE); break;
             case ',': this.addToken(TokenType.COMMA); break;
-            case '.': this.addToken(TokenType.DOT);
-            case '_': this.addToken(TokenType.MINUS);
-            case '+': this.addToken(TokenType.PLUS);
-            case ';': this.addToken(TokenType.SEMICOLON);
-            case '*': this.addToken(TokenType.STAR)
+            case '.': this.addToken(TokenType.DOT); break;
+            case '_': this.addToken(TokenType.MINUS); break;
+            case '+': this.addToken(TokenType.PLUS); break;
+            case ';': this.addToken(TokenType.SEMICOLON); break;
+            case '*': this.addToken(TokenType.STAR); break;
         }
     }
 
     isAtEnd(){
-        return this.current >= this.source?.length
+        return this.current >= this.source.length
+    }
+
+    advance(){
+        this.current++
+        return this.source?.charAt(this.current - 1)
+    }
+
+
+    addToken(type: TokenType, literal: Literal | null = null): void{
+        const text = this.source.substring(this.start, this.current)
+        this.tokens.push(new Token(type, text, literal, this.line))
     }
 }
+
 
 class Lox {
     hadError: boolean
@@ -71,11 +83,12 @@ class Lox {
 
     runPrompt(){
         const input = prompt();
+        if (input == null) return;
         this.run(input)
     }
 
-    run(source: string | null){
+    run(source: string){
         const scanner = new Scanner(source)
-        tokens: [] = scanner.scanTokens(); 
+        const tokens: Token[] = scanner.scanTokens(); 
     }
 }
