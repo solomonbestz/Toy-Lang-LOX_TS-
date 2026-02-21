@@ -1,6 +1,6 @@
 import { TokenType } from "./tokenType.ts";
 
-class Token{
+export class Token{
     type: TokenType
     lexeme: string
     literal: object
@@ -15,5 +15,9 @@ class Token{
 
     toString(){
         return this.type + " " + this.lexeme + " " + this.literal
+    }
+
+    add(obj: object){
+
     }
 }
