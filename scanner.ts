@@ -1,3 +1,4 @@
+import { TokenType } from "./tokenType.ts";
 
 class Scanner {
     source: string | null
