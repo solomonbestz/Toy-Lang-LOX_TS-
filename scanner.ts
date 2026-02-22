@@ -50,9 +50,15 @@ class Scanner {
                     this.addToken(TokenType.SLASH)
                 }
                 break;
+            case ' ':
+            case '\r':
+            case '\t':
+                break
+            case '\n':
+                this.line++
+                break;
             default: {
-                const lox = new Lox()
-                lox.error(this.line, "Unexpected Character.")
+                new Lox().error(this.line, "Unexpected Character.")
                 break
             }
                 
