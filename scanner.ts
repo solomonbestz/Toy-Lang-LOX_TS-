@@ -38,6 +38,12 @@ class Scanner {
             case '+': this.addToken(TokenType.PLUS); break;
             case ';': this.addToken(TokenType.SEMICOLON); break;
             case '*': this.addToken(TokenType.STAR); break;
+            default: {
+                const lox = new Lox()
+                lox.error(this.line, "Unexpected Character.")
+                break
+            }
+                
         }
     }
 
