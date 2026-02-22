@@ -1,5 +1,7 @@
 import { TokenType } from "./tokenType.ts";
 import { Literal, Token } from "./token.ts";
+import { match } from "node:assert";
+import { threadId } from "node:worker_threads";
 
 
 class Scanner {
@@ -38,6 +40,11 @@ class Scanner {
             case '+': this.addToken(TokenType.PLUS); break;
             case ';': this.addToken(TokenType.SEMICOLON); break;
             case '*': this.addToken(TokenType.STAR); break;
+            case '!': this.addToken(this.match('=') ? TokenType.BANG_EQUAL : TokenType.BANG); break;
+            case '=': this.addToken(this.match('=') ? TokenType.EQUAL_EQUAL : TokenType.EQUAL); break;
+            case '<': this.addToken(this.match('=') ? TokenType.LESS_EQUAL : TokenType.LESS); break;
+            case '>': this.addToken(this.match('=') ? TokenType.GREATER_EQUAL : TokenType.GREATER); break;
+
             default: {
                 const lox = new Lox()
                 lox.error(this.line, "Unexpected Character.")
@@ -60,6 +67,14 @@ class Scanner {
     addToken(type: TokenType, literal: Literal | null = null): void{
         const text = this.source.substring(this.start, this.current)
         this.tokens.push(new Token(type, text, literal, this.line))
+    }
+
+    match(expected: string): boolean{
+        if(this.isAtEnd()) return false;
+        if(this.source.charAt(this.current) != expected) return false;
+
+        this.current++;
+        return true;
     }
 }
 
